@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -68,6 +68,11 @@ export function AppSidebar() {
       },
     });
   };
+  const user = session.data?.user;
+
+  const userName = user?.name || user?.clinic?.name || user?.email || "";
+
+  const userInitial = userName.charAt(0).toUpperCase();
   return (
     <Sidebar>
       <SidebarHeader className="border-b p-4">
@@ -99,7 +104,10 @@ export function AppSidebar() {
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton size="lg">
                   <Avatar>
-                    <AvatarFallback>F</AvatarFallback>
+                    {user?.image && (
+                      <AvatarImage src={user.image} alt={userName} />
+                    )}
+                    <AvatarFallback>{userInitial}</AvatarFallback>
                   </Avatar>
                   <div>
                     <p className="text-sm">
