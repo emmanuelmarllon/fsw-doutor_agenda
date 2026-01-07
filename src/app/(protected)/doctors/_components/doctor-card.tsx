@@ -48,7 +48,7 @@ const DoctorCard = ({ doctor }: DoctorCardProps) => {
     useState(false);
   const deleteDoctorAction = useAction(deleteDoctor, {
     onSuccess: () => {
-      toast.success("Médico deletado com sucesso");
+      toast.success("Médico deletado com sucesso.");
     },
     onError: () => {
       toast.error("Erro ao deletar médico.");
@@ -58,6 +58,7 @@ const DoctorCard = ({ doctor }: DoctorCardProps) => {
     if (!doctor) return;
     deleteDoctorAction.execute({ id: doctor.id });
   };
+
   const doctorInitials = doctor.name
     .split(" ")
     .map((name) => name[0])
@@ -109,6 +110,7 @@ const DoctorCard = ({ doctor }: DoctorCardProps) => {
               availableToTime: availability.to.format("HH:mm:ss"),
             }}
             onSuccess={() => setIsUpsertDoctorDialogOpen(false)}
+            isOpen={isUpsertDoctorDialogOpen}
           />
         </Dialog>
         <AlertDialog>
@@ -121,7 +123,7 @@ const DoctorCard = ({ doctor }: DoctorCardProps) => {
           <AlertDialogContent>
             <AlertDialogHeader>
               <AlertDialogTitle>
-                Tem certeza que deseja deletar esse medico?
+                Tem certeza que deseja deletar esse médico?
               </AlertDialogTitle>
               <AlertDialogDescription>
                 Essa ação não pode ser revertida. Isso irá deletar o médico e
